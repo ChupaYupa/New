@@ -1,8 +1,6 @@
 import React from 'react';
 import s from './Container.module.css';
-let c1 = 'item';
-let c2 = 'active';
-let classes = `${s.item} ${s.active}`;
+import MyPosts from './My posts/MyPosts';
 
 const Container = () => {
     return (
@@ -13,18 +11,7 @@ const Container = () => {
             <div className = {`${s.item} ${s.active}`}>
                 <a>ava + discription</a>
             </div>
-            <div>
-                My posts
-                    <div className={s.item}>
-                    New post
-                    </div>
-                <div className={s.item}>
-                    Post1
-                    </div>
-                <div className={s.item}>
-                    Post2
-                    </div>
-            </div>
+            <MyPosts />
         </div>);
 }
 export default Container;
