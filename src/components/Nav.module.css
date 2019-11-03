@@ -1,0 +1,17 @@
+.nav {
+    grid-area: n;
+    background-color: rgba(250, 248, 249, 0.925);
+    color: rgb(17, 16, 16);
+    border-bottom-right-radius: 10%;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+  }
+  .item:hover {
+    background-color: white;
+    border-radius: 10%;
+    opacity: 0.8;
+    cursor: pointer;
+    color: black;
+    box-shadow: 5px 2px 4px #000000;
+  }
