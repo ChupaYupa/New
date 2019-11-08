@@ -2,14 +2,18 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
-import Container from './components/Container/Container';
+import Dialogs from './components/Dialogs/Dialogs';
+//import Container from './components/Container/Container';
 
-const App = () => {
+const App = (props) => {
     return (
         <div className="app-wrapper">
             <Header />
             <Nav />
-            <Container />
+            <div className="app-wrapper-content">
+            <Dialogs />
+            </div>
+           {/* <Container />*/}
         </div>
     );}
 export default App;

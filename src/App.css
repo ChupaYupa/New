@@ -10,3 +10,12 @@
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
 }
+
+.app-wrapper-content {
+  grid-area: c;
+  background-color: rgba(250, 248, 249, 0.925);
+  color: rgb(17, 16, 16);
+  border-bottom-left-radius: 1%;
+  margin: 5px;
+  padding: 5px;
+}
