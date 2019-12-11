@@ -5,13 +5,14 @@ import Nav from './components/Nav/Nav';
 import Dialogs from './components/Dialogs/Dialogs';
 import Container from './components/Container/Container';
 import { BrowserRouter, Route } from 'react-router-dom';
-import render from './Redux/State';
 import Message from './components/Dialogs/Message/Message';
 
 // import News from './components/News/News';
 // import Music from './components/Music/Music';
 // import Settings from './components/Settings/Settings';
 
+
+//callback передаем в App
 const App = (props) => {
 
     return (
@@ -20,7 +21,7 @@ const App = (props) => {
                 <Header />
                 <Nav />
                 <div className="app-wrapper-content">
-                    <Route path='/profile' render={() => <Container state={props.state.profilePage} addPost={props.addPost}/> }/>
+                    <Route path='/profile' render={() => <Container profilePage={props.state.profilePage} dispatch={props.dispatch} /> }/>
                     <Route path='/messages' render={() => <Dialogs state={props.state.messagesPage} /> }/>
                     {/* <Route path='/news' component={News} />
                     <Route path='/music' component={Music} />
