@@ -2,7 +2,8 @@ import React from 'react';
 import s from './Container.module.css';
 import MyPosts from './My posts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import { addPost } from '../../Redux/State';
+import { addPost } from '../../Redux/Store';
+import MyPostsContainer from './My posts/MyPostContainer';
 
 const Container = (props) => {
 
@@ -10,9 +11,7 @@ const Container = (props) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPosts posts={props.profilePage.posts} 
-            newPostText={props.profilePage.newPostText} 
-            dispatch={props.dispatch} />
+            <MyPostsContainer store={props.store} />
         </div>);
 }
 export default Container;
