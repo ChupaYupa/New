@@ -11,7 +11,7 @@ const Container = (props) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPostsContainer store={props.store} />
+            <MyPostsContainer />
         </div>);
 }
 export default Container;
