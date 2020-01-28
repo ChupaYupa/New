@@ -20,18 +20,22 @@ let initialState = {
 }
 
 const dialogsReducer = (state = initialState, action) => {
-    debugger
+    // let copyState;
+    // copyState.dialogsMessages = { ...state.dialogsMessages };
     switch (action.type) {
         case UPDATE_NEW_MESSAGE:
-            state.newMessagesText = action.body;
-            return state;
+            return {
+                ...state,
+                newMessagesText: action.body
+            };
         case SEND_MESSAGE:
             let body = state.newMessagesText;
-            state.newMessagesText = '';
-            state.dialogsMessages.push({ id: 6, message: body });
-            
-
-            return state;
+            return {
+                ...state,
+                newMessagesText: '',
+                dialogsMessages: [...state.dialogsMessages, { id: 6, message: body }]
+            };
+        // copyState.newMessagesText = '';
         default:
             return state;
     }
@@ -40,7 +44,7 @@ export let addSendMessageCreator = () => ({
     type: SEND_MESSAGE
 })
 export let updateNewMessageBodyreator = (body) => ({
- type: UPDATE_NEW_MESSAGE, body: body
+    type: UPDATE_NEW_MESSAGE, body: body
 })
 
 

@@ -8,6 +8,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Message from './components/Dialogs/Message/Message';
 import store from './Redux/redux-store';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 // import News from './components/News/News';
 // import Music from './components/Music/Music';
@@ -25,6 +26,7 @@ const App = (props) => {
                 <div className="app-wrapper-content">
                     <Route path='/profile' render={() => <Container />} />
                     <Route path='/messages' render={() => <DialogsContainer />} />
+                    <Route path='/users' render={() => <UsersContainer />} />
                     {/* <Route path='/news' component={News} />
                     <Route path='/music' component={Music} />
                     <Route path='/settings' component={Settings} /> */}

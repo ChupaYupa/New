@@ -7,18 +7,16 @@ import * as serviceWorker from './serviceWorker';
 import store from './Redux/redux-store';
 import { Provider } from "react-redux";
 
-let rerenderEntinerThree = (state) => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <Provider store={store}>                 {/*передаем Context компоненту*/}
-                <App />,
+
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>                 {/*передаем Context компоненту*/}
+            <App />,
              </Provider>
-        </BrowserRouter>, document.getElementById('root'));
-}
-rerenderEntinerThree();
-store.subscribe(() => {
-    rerenderEntinerThree();
-});
+    </BrowserRouter>, document.getElementById('root'));
+
+
+
 
 
 // If you want your app to work offline and load faster, you can change
