@@ -1,3 +1,6 @@
+import {usersAPI} from "../components/API/api";
+import {setTotalCount, setUsers, toggleIsFeaching} from "./users-reducer";
+
 const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
@@ -46,6 +49,7 @@ export let addSendMessageCreator = () => ({
 export let updateNewMessageBodyreator = (body) => ({
     type: UPDATE_NEW_MESSAGE, body: body
 })
+
 
 
 export default dialogsReducer;

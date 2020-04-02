@@ -4,14 +4,18 @@ import MyPosts from './My posts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import { addPost } from '../../Redux/Store';
 import MyPostsContainer from './My posts/MyPostContainer';
+import Preoader from "../common/Preoader/Preoader";
 
-const Container = (props) => {
-
+const Profile = (props) => {
+    debugger
+if(!props.profile) {
+    return <Preoader/>
+}
 
     return (
         <div>
-            <ProfileInfo />
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer />
         </div>);
 }
-export default Container;
+export default Profile;

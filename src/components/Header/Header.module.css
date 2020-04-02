@@ -1,12 +1,25 @@
+.appWrapper {
+
+}
 .header {
-    grid-area: h;
-    background-color: greenyellow;
+    background-color: #020202;
     position: fixed;
     top: 0;
     width: 100%;
-    box-shadow: 5px 2px 4px #000000;
+    justify-content: space-between;
+    display: flex;
+    height: 60px;
+    border: 1px solid white;
+    border-radius: 1%;
   }
   .header img {
-    width: 6%;
     box-shadow: 2px 2px 2px rgb(10, 10, 10);
+      box-shadow: 2px 2px 2px rgb(10, 10, 10);
+      width: 50px;
+      margin: 7px;
+  }
+  .loginBlock {
+      float: right;
+      margin: 16px;
+      color: white;
   }

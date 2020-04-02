@@ -1,26 +1,63 @@
 import React from 'react';
-import s from './Users.module.css';
 import { connect } from 'react-redux';
-import { followedAC, unfollowedAC, setUsersAC } from '../../Redux/users-reducer';
+import { follow, unfollow,  setCountPage,  isFollowing, getUsersThunk } from '../../Redux/users-reducer';
 import Users from './Users';
+import Preoader from "../common/Preoader/Preoader";
+import {withAuthRedirect} from "../HOC/withAuthComponent";
+import {compose} from "redux";
+
+class UsersContainer extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    componentDidMount() {
+        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
+    }
+
+    onPageChanged(currentPage) {
+        this.props.getUsersThunk(currentPage, this.props.pageSize);
+
+    }
+    render(props) {
+        return <>
+            {this.props.isFeaching ? <Preoader/> :
+                <Users totalUsersCount={this.props.totalUsersCount}
+                       pageSize={this.props.pageSize}
+                       currentPage={this.props.currentPage}
+                       onPageChanged={this.onPageChanged.bind(this)}
+                       users={this.props.users}
+                       unfollow={this.props.unfollow}
+                       follow={this.props.follow}
+                       followingInProgress={this.props.followingInProgress}
+                       isFollowing={this.props.isFollowing}
+                />
+            }
+          </>
+
+    }
+}
+
+
+
+
+
+
 
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage,
+        isFeaching: state.usersPage.isFeaching,
+        followingInProgress: state.usersPage.followingInProgress
     }
-}
-let mapDispathToProps = (dispath) => {
-    return {
-        follow: (userId) => {
-            dispath(followedAC(userId))
-        },
-        unfollow: (userId) => {
-            dispath(unfollowedAC(userId));
-        },
-        setUsers: (users) => {
-            dispath(setUsersAC(users));
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispathToProps)(Users);
+};
+
+// let widthHocUserComponent = withAuthRedirect(UsersContainer)
+
+export default compose(                           //HOC
+    withAuthRedirect,
+    connect (mapStateToProps, {follow, unfollow, setCountPage, isFollowing, getUsersThunk}),
+    )(UsersContainer);
