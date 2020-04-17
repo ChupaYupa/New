@@ -1,7 +1,6 @@
 import {usersAPI} from "../components/API/api";
 import {setTotalCount, setUsers, toggleIsFeaching} from "./users-reducer";
 
-const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let initialState = {
@@ -19,23 +18,16 @@ let initialState = {
         { id: 4, message: "yo" },
         { id: 5, message: "yo" }
     ],
-    newMessagesText: 'chupa'
 }
 
 const dialogsReducer = (state = initialState, action) => {
     // let copyState;
     // copyState.dialogsMessages = { ...state.dialogsMessages };
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE:
-            return {
-                ...state,
-                newMessagesText: action.body
-            };
         case SEND_MESSAGE:
-            let body = state.newMessagesText;
+            let body = action.newMessagesText;
             return {
                 ...state,
-                newMessagesText: '',
                 dialogsMessages: [...state.dialogsMessages, { id: 6, message: body }]
             };
         // copyState.newMessagesText = '';
@@ -43,11 +35,8 @@ const dialogsReducer = (state = initialState, action) => {
             return state;
     }
 }
-export let addSendMessageCreator = () => ({
-    type: SEND_MESSAGE
-})
-export let updateNewMessageBodyreator = (body) => ({
-    type: UPDATE_NEW_MESSAGE, body: body
+export let addSendMessageCreator = (newMessagesText) => ({
+    type: SEND_MESSAGE, newMessagesText
 })
 
 

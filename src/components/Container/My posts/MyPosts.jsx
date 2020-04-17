@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import {Field, reduxForm} from "redux-form";
 // let addPostActionCreator = () => {
 //     return {type: 'ADD-POST'}
 // }
@@ -24,17 +25,15 @@ const MyPosts = (props) => {
         // let action = updateNewPostTextActionCreator(text);
         // props.dispatch(action);
     }
+    let addNewMessage = (e) =>{
+        props.addPost(e.newMessagesBody)
+    }
 
     return (
         <div>
             <h3>My posts</h3>
             <div className={s.item}>
-                <div>
-                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText} />
-                </div>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
+               <AddMyPostsReduxForm onSubmit={addNewMessage}/>
             </div>
             <div className={s.posts}>
                 {postsElements}
@@ -42,4 +41,15 @@ const MyPosts = (props) => {
         </div>
     );
 }
+const AddPostForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field component="textarea" name="newMessagesBody"  placeholder="Enter your message"/>
+            <div>
+                <button>Add post</button>
+            </div>
+        </form>
+    )
+}
+const AddMyPostsReduxForm = reduxForm({form:"postAddMessageForm"})(AddPostForm)
 export default MyPosts;

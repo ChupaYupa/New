@@ -2,16 +2,16 @@ import {setTotalCount, setUsers, toggleIsFeaching} from "./users-reducer";
 import {dialogAPI} from "../components/API/api";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE ='SET_USER_PROFILE';
+const SET_STATUS ='SET_STATUS';
 
 let initialState = {
     posts: [
         { id: 1, message: "It's my first post", like: 20 },
         { id: 2, message: 'Hello, how are you?', like: 40 }
     ],
-    newPostText: 'chupayupa.com',
-    profile: null
+    profile: null,
+    status: ""
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -19,25 +19,22 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST: {
             let newPost = {
                 id: 3,
-                message: state.newPostText,
+                message: action.newMessagesBody,
                 like: 0
             };
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ''
             };
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newText //добавляем newText в action
-            };
-
         }
         case SET_USER_PROFILE: {
             return {
                 ...state, profile: action.profile
+            };
+        }
+        case SET_STATUS: {
+            return {
+                ...state, status: action.status
             };
         }
         default:
@@ -45,17 +42,30 @@ const profileReducer = (state = initialState, action) => {
     }
 
 }
-export const addPostActionCreator = () => ({
-    type: ADD_POST
+export const addPostActionCreator = (newMessagesBody) => ({
+    type: ADD_POST, newMessagesBody
 })
-export const updateNewPostTextActionCreator = (text) => ({
-    type: UPDATE_NEW_POST_TEXT, newText: text
+export const setStatusActionCreator = (status) => ({
+    type: SET_STATUS, status
 })
 
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+
 export const getProfile = (userId) => (dispatch) => {
     dialogAPI.getProfile(userId).then(response => {
         dispatch (setUserProfile(response.data)); //получить профиль
+    });
+}
+export const getStatus = (userId) => (dispatch) => {
+    dialogAPI.getStatus(userId).then(response => {
+        dispatch (setStatusActionCreator(response.data)); //получить профиль
+    });
+};
+export const updateStatus = (status) => (dispatch) => {
+    dialogAPI.updateStatus(status).then(response => {
+        if(response.data.resultCode === 0 ) {
+            dispatch(setStatusActionCreator(status))
+        }//получить профиль
     });
 }
 
