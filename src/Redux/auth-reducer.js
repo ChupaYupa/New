@@ -1,4 +1,5 @@
 import {headerAPI} from "../components/API/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -27,26 +28,29 @@ const authReducer = (state = initialState, action) => {
     }
 
 }
-export const setUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, payload: {userId, email,
+export const setUserData = (id, email, login, isAuth) => ({type: SET_USER_DATA, payload: {id, email,
         login, isAuth}})
 
 export const getAuthUser = () => (dispatch) => {
-    debugger
-    headerAPI.getLogin()
+   return  headerAPI.getLogin()
         .then(response => {
             if(response.data.resultCode === 0) {
-                let {userId, email, login} = response.data.data;
-               dispatch(setUserData(userId, email, login, true));
+                let {id, email, login} = response.data.data;
+               dispatch(setUserData(id, email, login, true));
             }
         });
 }
 
 export const login = (email, password, rememberMe) => (dispatch) => {
-    debugger
+    // let action = stopSubmit("Login", {_error: "Email is Error"});
+    // dispatch(action);
     headerAPI.login(email,password,rememberMe)
         .then(response => {
             if(response.data.resultCode === 0) {
                dispatch(getAuthUser())
+            } else {
+                let messages = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
+                dispatch(stopSubmit("Login", {_error: messages}))
             }
         });
 }

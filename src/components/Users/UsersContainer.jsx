@@ -45,7 +45,9 @@ class UsersContainer extends React.Component {
 
 
 let mapStateToProps = (state) => {
+    debugger
     return {
+
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
@@ -58,6 +60,5 @@ let mapStateToProps = (state) => {
 // let widthHocUserComponent = withAuthRedirect(UsersContainer)
 
 export default compose(                           //HOC
-    withAuthRedirect,
     connect (mapStateToProps, {follow, unfollow, setCountPage, isFollowing, getUsersThunk}),
     )(UsersContainer);
