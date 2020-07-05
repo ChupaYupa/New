@@ -1,4 +1,5 @@
 import {usersAPI} from "../components/API/api";
+import {helpBooleenFollow} from "../Utils/objectFollowHelp";
 
 const FOLLOW = 'users/FOLLOW';
 const UNFOLLOW = 'users/UNFOLLOW';
@@ -23,24 +24,13 @@ const usersReducer = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return { ...u, followed: true }
-                    }
-                    return u;
-                })
+                users: helpBooleenFollow(state.users, action.userId, "id", {followed:true})
             }
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return { ...u, followed: false }
-                    }
-                    return u;
-                })
+                users: helpBooleenFollow(state.users, action.userId, "id", {followed:false})
             }
-
         case SET_USERS: {
             return {
                 ...state,
@@ -100,25 +90,28 @@ export const getUsersThunk =(currentPage, pageSize)=>{
     }
 }
 
-export const follow =(userId)=>{
-    return async (dispatch) => {
-        dispatch (isFollowing(true, userId));
-        let response = await
-        usersAPI.followAPI(userId)
-                if(response.data.resultCode === 0) {
-                    dispatch(followAccept(userId));
-                }
-                dispatch(isFollowing(false, userId))
-    }
+
+export const followUnfollow = async (dispatch, userId, apiMethod, actionMethod) => {
+        dispatch(isFollowing(true, userId));
+        let response = await apiMethod(userId);
+        if (response.data.resultCode === 0) {
+            dispatch(actionMethod(userId));
+        }
+        dispatch(isFollowing(false, userId))
+
 }
+    export const follow =(userId)=>{
+        return async (dispatch) => {
+            let apiMethod = usersAPI.followAPI.bind(usersAPI);
+            let actionMethod = followAccept;
+            followUnfollow(dispatch, userId, apiMethod, actionMethod)
+        }
+    }
 export const unfollow =(userId)=>{
     return async (dispatch) => {
-        dispatch (isFollowing(true, userId));
-       let response = await usersAPI.unFollowAPI(userId)
-                if(response.data.resultCode === 0) {
-                    dispatch(unfollowAccept(userId));
-                }
-                dispatch(isFollowing(false, userId))
+        let apiMethod = usersAPI.unFollowAPI.bind(usersAPI);
+        let actionMethod = unfollowAccept;
+        followUnfollow(dispatch, userId, apiMethod, actionMethod)
     }
 }
 export default usersReducer;
