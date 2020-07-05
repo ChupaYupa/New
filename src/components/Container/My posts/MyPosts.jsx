@@ -2,9 +2,8 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import {Field, reduxForm} from "redux-form";
-import { requiredField, maxLengthreator,} from "../../../Utils/Validation/indexValid";
+import {maxLengthreator, requiredField,} from "../../../Utils/Validation/indexValid";
 import {Textarea} from "../../common/FormsControls/FormsControls";
-import validator from 'validator';
 
 
 // let addPostActionCreator = () => {
@@ -34,24 +33,12 @@ let AddPostForm = (props) => {
 const AddMyPostsReduxForm = reduxForm({form:"postAddMessageForm"})(AddPostForm);
 
 
-const MyPosts = (props) => {
-    let postsElements = props.posts.map(p => <Post message={p.message} like={p.like} />);
+const MyPosts =  React.memo( props => {
+    console.log("RENDER")
+    let postsElements = props.posts.map(p => <Post message={p.message} like={p.like}/>);
 
-    // let newPostElement = React.createRef();
-    // //добавление поста
-    // let onAddPost = () => {                 //callback
-    //     props.addPost();
-    //     // let text = newPostElement.current.value;
-    //     // props.dispatch(addPostActionCreator());
-    // }
-    //обновление поста
-    // let onPostChange = () => {                   //callback
-    //     let text = newPostElement.current.value;
-    //     props.updateNewPostText(text);
-    //     // let action = updateNewPostTextActionCreator(text);
-    //     // props.dispatch(action);
-    // }
-    let addNewMessage = (e) =>{
+
+    let addNewMessage = (e) => {
         props.addPost(e.newMessagesBody)
     }
 
@@ -59,13 +46,13 @@ const MyPosts = (props) => {
         <div>
             <h3>My posts</h3>
             <div className={s.item}>
-               <AddMyPostsReduxForm onSubmit={addNewMessage}/>
+                <AddMyPostsReduxForm onSubmit={addNewMessage}/>
             </div>
             <div className={s.posts}>
                 {postsElements}
             </div>
         </div>
     );
-}
+});
 
 export default MyPosts;

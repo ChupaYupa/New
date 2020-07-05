@@ -5,6 +5,14 @@ import Users from './Users';
 import Preoader from "../common/Preoader/Preoader";
 import {withAuthRedirect} from "../HOC/withAuthComponent";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFeaching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../Redux/users-selectors";
 
 class UsersContainer extends React.Component {
     constructor(props) {
@@ -19,6 +27,7 @@ class UsersContainer extends React.Component {
 
     }
     render(props) {
+        console.log("RENDER")
         return <>
             {this.props.isFeaching ? <Preoader/> :
                 <Users totalUsersCount={this.props.totalUsersCount}
@@ -45,15 +54,14 @@ class UsersContainer extends React.Component {
 
 
 let mapStateToProps = (state) => {
-    debugger
+    console.log("mapStateToProps")
     return {
-
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFeaching: state.usersPage.isFeaching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFeaching: getIsFeaching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 };
 

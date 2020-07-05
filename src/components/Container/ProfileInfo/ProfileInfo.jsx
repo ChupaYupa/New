@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Profile.module.css';
-import ProfileStatus from './ProfileStatus.js'
+import ProfileHockStatus from './ProfileHockStatus.js'
 import userPhoto from './../../../images/1aa63493e17019ffb918b635151f9ba1--dearly-beloved-icons.jpg';
 
 
@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.discriptionblock}>
                 <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto} />
-               <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+               <ProfileHockStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>);
 }

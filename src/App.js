@@ -8,10 +8,11 @@ import ProfileContainer from "./components/Container/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/login/Login";
 import {compose} from "redux";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {getAuthUser} from "./Redux/auth-reducer";
 import {getInitialize} from "./Redux/app-reduce";
 import Preoader from "./components/common/Preoader/Preoader";
+import store from "./Redux/redux-store";
 
 
 
@@ -31,6 +32,7 @@ class App extends React.Component {
         }
         return (
             <BrowserRouter>
+                <Provider store={store}>
                 <div className="app-wrapper">
                     <HeaderContainer/>
                     <Nav/>
@@ -44,6 +46,7 @@ class App extends React.Component {
                     <Route path='/settings' component={Settings} /> */}
                     </div>
                 </div>
+                </Provider>
             </BrowserRouter>
         );
     }

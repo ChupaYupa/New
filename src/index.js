@@ -7,13 +7,12 @@ import * as serviceWorker from './serviceWorker';
 import store from './Redux/redux-store';
 import { Provider } from "react-redux";
 
+// setInterval(()=>{
+//     store.dispatch({type:"FAKE"})
+//     console.log("Сработал setInterval")
+// }, 1000);
 
-ReactDOM.render(
-    <BrowserRouter>
-        <Provider store={store}>                 {/*передаем Context компоненту*/}
-            <App />,
-             </Provider>
-    </BrowserRouter>, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 
 
