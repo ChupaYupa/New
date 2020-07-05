@@ -1,12 +1,12 @@
 import {usersAPI} from "../components/API/api";
 
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET_USERS';
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-const SET_USERS_COUNT = 'SET_USERS_COUNT';
-const TOGGLE_IS_FEATHING = 'TOGGLE_IS_FEATHING';
-const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS'
+const FOLLOW = 'users/FOLLOW';
+const UNFOLLOW = 'users/UNFOLLOW';
+const SET_USERS = 'users/SET_USERS';
+const SET_CURRENT_PAGE = 'users/SET_CURRENT_PAGE';
+const SET_USERS_COUNT = 'users/SET_USERS_COUNT';
+const TOGGLE_IS_FEATHING = 'users/TOGGLE_IS_FEATHING';
+const FOLLOWING_IN_PROGRESS = 'users/FOLLOWING_IN_PROGRESS'
 
 let initialState = {
     users: [],
@@ -85,40 +85,40 @@ export const setTotalCount = (totalUsersCount) => ({ type: SET_USERS_COUNT, coun
 export const toggleIsFeaching = (isFeaching) => ({ type: TOGGLE_IS_FEATHING, isFeaching });
 export const isFollowing = (followingInProgress) => ({ type: FOLLOWING_IN_PROGRESS, followingInProgress: followingInProgress });
 
+
+
+//      -----------THUNK---------------
 export const getUsersThunk =(currentPage, pageSize)=>{
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch (toggleIsFeaching(true)) //загрузка preloader
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
+        let data = await
+        usersAPI.getUsers(currentPage, pageSize)
             debugger
             dispatch(toggleIsFeaching(false)); //загрузка preloader
             dispatch(setUsers(data.items)); //получить пользователей
             dispatch(setTotalCount(data.totalCount));
-        });
     }
 }
 
 export const follow =(userId)=>{
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch (isFollowing(true, userId));
+        let response = await
         usersAPI.followAPI(userId)
-            .then(response => {
                 if(response.data.resultCode === 0) {
                     dispatch(followAccept(userId));
                 }
                 dispatch(isFollowing(false, userId))
-            });
     }
 }
 export const unfollow =(userId)=>{
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch (isFollowing(true, userId));
-        usersAPI.unFollowAPI(userId)
-            .then(response => {
+       let response = await usersAPI.unFollowAPI(userId)
                 if(response.data.resultCode === 0) {
                     dispatch(unfollowAccept(userId));
                 }
                 dispatch(isFollowing(false, userId))
-            });
     }
 }
 export default usersReducer;

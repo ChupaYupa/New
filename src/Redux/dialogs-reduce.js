@@ -1,7 +1,7 @@
 import {usersAPI} from "../components/API/api";
 import {setTotalCount, setUsers, toggleIsFeaching} from "./users-reducer";
 
-const SEND_MESSAGE = 'SEND-MESSAGE';
+const SEND_MESSAGE = 'dialogs/SEND-MESSAGE';
 
 let initialState = {
     dialogsData: [

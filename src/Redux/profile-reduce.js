@@ -1,9 +1,8 @@
-import {setTotalCount, setUsers, toggleIsFeaching} from "./users-reducer";
 import {dialogAPI} from "../components/API/api";
 
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE ='SET_USER_PROFILE';
-const SET_STATUS ='SET_STATUS';
+const ADD_POST = 'profile/ADD-POST';
+const SET_USER_PROFILE ='profile/SET_USER_PROFILE';
+const SET_STATUS ='profile/SET_STATUS';
 
 let initialState = {
     posts: [
@@ -51,22 +50,22 @@ export const setStatusActionCreator = (status) => ({
 
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
-export const getProfile = (userId) => (dispatch) => {
-    dialogAPI.getProfile(userId).then(response => {
+
+
+//      -----------THUNK---------------
+export const getProfile = (userId) => async (dispatch) => {
+    let response = await dialogAPI.getProfile(userId)
         dispatch (setUserProfile(response.data)); //получить профиль
-    });
 }
-export const getStatus = (userId) => (dispatch) => {
-    dialogAPI.getStatus(userId).then(response => {
+export const getStatus = (userId) => async (dispatch) => {
+   let response = await dialogAPI.getStatus(userId)
         dispatch (setStatusActionCreator(response.data)); //получить профиль
-    });
 };
-export const updateStatus = (status) => (dispatch) => {
-    dialogAPI.updateStatus(status).then(response => {
+export const updateStatus = (status) => async (dispatch) => {
+    let response = await dialogAPI.updateStatus(status)
         if(response.data.resultCode === 0 ) {
             dispatch(setStatusActionCreator(status))
         }//получить профиль
-    });
 }
 
 export default profileReducer;
