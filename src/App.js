@@ -9,7 +9,6 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/login/Login";
 import {compose} from "redux";
 import {connect, Provider} from "react-redux";
-import {getAuthUser} from "./Redux/auth-reducer";
 import {getInitialize} from "./Redux/app-reduce";
 import Preoader from "./components/common/Preoader/Preoader";
 import store from "./Redux/redux-store";
@@ -58,6 +57,16 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(
+ let AppCompose = compose(
     withRouter, connect ( mapStateToProps, {getInitialize}),
     )(App);
+
+ const MainApp = (props) => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppCompose />
+        </Provider>
+    </BrowserRouter>
+}
+export default  MainApp;
+

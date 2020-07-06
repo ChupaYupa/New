@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { follow, unfollow,  setCountPage,  isFollowing, getUsersThunk } from '../../Redux/users-reducer';
 import Users from './Users';
 import Preoader from "../common/Preoader/Preoader";
-import {withAuthRedirect} from "../HOC/withAuthComponent";
 import {compose} from "redux";
 import {
     getCurrentPage,
@@ -45,13 +44,6 @@ class UsersContainer extends React.Component {
 
     }
 }
-
-
-
-
-
-
-
 
 let mapStateToProps = (state) => {
     console.log("mapStateToProps")
