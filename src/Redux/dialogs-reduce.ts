@@ -3,7 +3,21 @@ import {setTotalCount, setUsers, toggleIsFeaching} from "./users-reducer";
 
 const SEND_MESSAGE = 'dialogs/SEND-MESSAGE';
 
-let initialState = {
+
+type dialogsDataArray = {
+    id: number,
+    name: string
+}
+type dialogsMessagesArray = {
+    id: number,
+    message: string
+}
+type InitialStateType = {
+    dialogsData: Array<dialogsDataArray>,
+    dialogsMessages: Array<dialogsMessagesArray>
+}
+
+let initialState: InitialStateType = {
     dialogsData: [
         { id: 1, name: "Dima" },
         { id: 2, name: "Sveta" },
@@ -20,7 +34,7 @@ let initialState = {
     ],
 }
 
-const dialogsReducer = (state = initialState, action) => {
+const dialogsReducer = (state = initialState, action:GetMessageAC) => {
     // let copyState;
     // copyState.dialogsMessages = { ...state.dialogsMessages };
     switch (action.type) {
@@ -35,7 +49,12 @@ const dialogsReducer = (state = initialState, action) => {
             return state;
     }
 }
-export let addSendMessageCreator = (newMessagesText) => ({
+
+type GetMessageAC = {
+    type: typeof SEND_MESSAGE,
+    newMessagesText: string
+}
+export let addSendMessageCreator = (newMessagesText:string) => ({
     type: SEND_MESSAGE, newMessagesText
 })
 
