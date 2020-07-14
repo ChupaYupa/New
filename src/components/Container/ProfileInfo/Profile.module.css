@@ -5,3 +5,9 @@
 .discriptionblock {
     padding: 10px;
 }
+.photo {
+    max-width: 200px;
+}
+.contact {
+    padding-left: 10px;
+}

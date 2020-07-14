@@ -1,25 +1,29 @@
 .appWrapper {
-
 }
 .header {
-    background-color: #020202;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    justify-content: space-between;
-    display: flex;
-    height: 60px;
-    border: 1px solid white;
-    border-radius: 1%;
-  }
-  .header img {
-    box-shadow: 2px 2px 2px rgb(10, 10, 10);
-      box-shadow: 2px 2px 2px rgb(10, 10, 10);
-      width: 50px;
-      margin: 7px;
-  }
-  .loginBlock {
-      float: right;
-      margin: 16px;
-      color: white;
-  }
+  background-color: #020202;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  height: 60px;
+  border: 1px solid white;
+  border-radius: 1%;
+}
+.header img {
+  box-shadow: 2px 2px 2px rgb(10, 10, 10);
+  box-shadow: 2px 2px 2px rgb(10, 10, 10);
+  width: 50px;
+  margin: 7px;
+}
+.loginBlock {
+  float: right;
+  margin: 16px;
+  color: white;
+}
+.NavLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

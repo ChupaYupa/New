@@ -1,3 +1,10 @@
 .selectedPage {
-    font-weight: bold;
+  font-weight: bold;
+  border: black solid 2px;
+}
+.paginator {
+  margin: 10px;
+}
+.pageNumber {
+  font-weight: revert;
 }

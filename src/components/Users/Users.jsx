@@ -3,10 +3,10 @@ import Paginator from "../common/FormsControls/Paginator";
 import User from "./User";
 
 
-let Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, followingInProgress, unfollow, follow, users}) => {
+let Users = ({totalItemsCount, pageSize, currentPage, onPageChanged, followingInProgress, unfollow, follow, users}) => {
 
 
-    let pagesCount = totalUsersCount / pageSize
+    let pagesCount = totalItemsCount / pageSize
 
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -17,7 +17,7 @@ let Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, followingIn
         <div>
             <Paginator currentPage={currentPage}
                        onPageChanged={onPageChanged}
-                       totalUsersCount={totalUsersCount}
+                       totalItemsCount={totalItemsCount}
                        pageSize={pageSize}
 
             />
